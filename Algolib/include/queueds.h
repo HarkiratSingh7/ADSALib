@@ -9,7 +9,7 @@ namespace algolib
     public:
         Queue(size_t MaximumCount) : MAX(MaximumCount)
         {
-            data = new T(MaximumCount);
+            data = new T[MaximumCount];
         }
 
         ~Queue()
