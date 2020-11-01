@@ -61,7 +61,7 @@ void TowerOfHanoi(int n, string BeginningPegName, string AuxiliaryPegName, strin
     Stack<string> T_BEG(n);
     Stack<string> T_AUX(n);
     Stack<string> T_END(n);
-    Stack<int> T_ADD(n > 2 ? n : 2);
+    Stack<int> T_ADD(n);
     string temp;
     int add = 1;
     bool running = true;
