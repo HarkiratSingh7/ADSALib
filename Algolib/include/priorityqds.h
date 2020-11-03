@@ -1,6 +1,8 @@
 #ifndef PRIORITYQDS_H
 #define PRIORITYQDS_H
 #include "framework.h"
+#define LL_INHERITED
+#include "linkedlist.h"
 
 // Construction work ahead
 namespace algolib
@@ -12,77 +14,66 @@ namespace algolib
         {
             T info;
             size_t PriorityValue{0};
-            PQNode<T> *link = nullptr;
+            //PQNode<T> *link = nullptr;
         };
 
         template <typename T>
-        class PriorityQ
+        class PriorityQ : private LLinkedList<PQNode<T>>
         {
         public:
+            //PriorityQ() : LLinkedList<T>(false) { }
+
             void Insert(T item, size_t Priority)
             {
-                PQNode<T> *NEW_NODE = new PQNode<T>;
-                NEW_NODE->info = item;
-                NEW_NODE->PriorityValue = Priority;
-                if (START == nullptr)
+                LLNode<PQNode<T>> *PREV = nullptr;
+                if (LLinkedList<PQNode<T>>::START)
                 {
-                    NEW_NODE->link = nullptr;
-                    START = NEW_NODE;
-                    return;
+                    LLNode<PQNode<T>> *PTR = LLinkedList<PQNode<T>>::START;
+                    // Find a node, to insert after
+                    // It should be inserted after the node having same priority
+                    while (PTR->info.PriorityValue <= Priority)
+                    {
+                        PREV = PTR;
+                        PTR = PTR->link;
+                        if (!PTR)
+                            break;
+                    }
                 }
-                PQNode<T> *PREV = nullptr;
-                PQNode<T> *PTR = START;
-                // Find a node, to insert after
-                // It should be inserted after the node having same priority
-                while (PTR->PriorityValue <= Priority)
-                {
-                    PREV = PTR;
-                    PTR = PTR->link;
-                    if (!PTR)
-                        break;
-                }
-                NEW_NODE->link = PTR;
-                if (PREV)
-                    PREV->link = NEW_NODE;
-                else
-                    START = NEW_NODE;
-                
+
+                LLinkedList<PQNode<T>>::InsertAfter(PREV, {item, Priority});
             }
 
             T Delete()
             {
-                T item {};
+                T item{};
                 if (this->START == nullptr)
                 {
                     _LOG_("UNDERFLOW");
                     return item;
                 }
-                PQNode<T> *tmp = START;
-                item = tmp->info;
-                START = START->link;
+                LLNode<PQNode<T>> *tmp = LLinkedList<PQNode<T>>::START;
+                item = tmp->info.info;
+                LLinkedList<PQNode<T>>::START = LLinkedList<PQNode<T>>::START->link;
                 delete tmp;
                 return item;
             }
 
             bool IsEmpty() const
             {
-                if (START == nullptr)
+                if (LLinkedList<PQNode<T>>::START == nullptr)
                     return true;
                 return false;
             }
 
             T GetHigh() const
             {
-                if (START == nullptr)
+                if (LLinkedList<PQNode<T>>::START == nullptr)
                 {
                     T t{};
                     return t;
                 }
-                return START->info;
+                return LLinkedList<PQNode<T>>::START->info.info;
             }
-
-        private:
-            PQNode<T> *START = nullptr;
         };
     } // namespace OneWayLList
 } // namespace algolib

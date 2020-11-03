@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 #include "framework.h"
 #include "stackds.h"
+
 namespace algolib
 {
 	template <typename T>
@@ -22,7 +23,7 @@ namespace algolib
 
 		~LLinkedList()
 		{
-			Stack<LLNode<T>*> ToRemove(this->Count());
+			Stack<LLNode<T> *> ToRemove(this->Count());
 			LLNode<T> *PTR = START;
 			while (PTR != nullptr)
 			{
@@ -143,23 +144,6 @@ namespace algolib
 			delete theNode;
 		}
 
-		void InsertBefore(LLNode<T> *loc, T item) noexcept(false)
-		{
-			LLNode<T> *NEW_NODE = new LLNode<T>;
-			NEW_NODE->info = item;
-
-			if (loc == nullptr)
-			{
-				NEW_NODE->link = START;
-				START = NEW_NODE;
-			}
-			else
-			{
-				NEW_NODE->link = loc->link;
-				loc->link = NEW_NODE;
-			}
-		}
-
 		void InsertAndSort(T item)
 		{
 			LLNode<T> *location;
@@ -187,9 +171,25 @@ namespace algolib
 			LOC = PREV;
 		}
 
-	private:
+	protected:
 		LLNode<T> *START = nullptr;
-		bool is_sorted {false};
+		bool is_sorted{false};
+		void InsertAfter(LLNode<T> *loc, T item) noexcept(false)
+		{
+			LLNode<T> *NEW_NODE = new LLNode<T>;
+			NEW_NODE->info = item;
+
+			if (loc == nullptr)
+			{
+				NEW_NODE->link = START;
+				START = NEW_NODE;
+			}
+			else
+			{
+				NEW_NODE->link = loc->link;
+				loc->link = NEW_NODE;
+			}
+		}
 	};
 } // namespace algolib
 #endif
