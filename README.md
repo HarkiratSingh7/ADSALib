@@ -27,4 +27,4 @@ The Algolib folder has implementation of various data structures and their algor
 
 #### Tower of hanoi with and without recursion - [Implementations/TowerOfHanoi](Implementations/TowerOfHanoi)
 
-#### Infix postfix conversion - [Implementation/infixexpdemo](Implementation/infixexpdemo)
+#### Infix postfix conversion - [Implementations/infixexpdemo](Implementations/infixexpdemo)
