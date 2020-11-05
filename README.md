@@ -15,7 +15,7 @@ The Algolib folder has implementation of various data structures and their algor
 
 #### Linkedlist header - [Algolib/include/linkedlist.h](Algolib/include/linkedlist.h)
 
-#### Queue header - [Algoblib/include/queueds.h](Algoblib/include/queueds.h)
+#### Queue header - [Algolib/include/queueds.h](Algoblib/include/queueds.h)
 
 #### Double ended queue header - [Algolib/include/dequeds.h](Algolib/include/dequeds.h)
 
