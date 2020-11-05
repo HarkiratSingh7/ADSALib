@@ -3,32 +3,28 @@
 #include "framework.h"
 #define LL_INHERITED
 #include "linkedlist.h"
-
-// Construction work ahead
+#include "queueds.h"
 namespace algolib
 {
     namespace OneWayLList
     {
         template <typename T>
-        struct PQNode
+        struct Item
         {
             T info;
             size_t PriorityValue{0};
-            //PQNode<T> *link = nullptr;
         };
 
         template <typename T>
-        class PriorityQ : private LLinkedList<PQNode<T>>
+        class PriorityQ : private LLinkedList<Item<T>>
         {
         public:
-            //PriorityQ() : LLinkedList<T>(false) { }
-
             void Insert(T item, size_t Priority)
             {
-                LLNode<PQNode<T>> *PREV = nullptr;
-                if (LLinkedList<PQNode<T>>::START)
+                LLNode<Item<T>> *PREV = nullptr;
+                if (LLinkedList<Item<T>>::START)
                 {
-                    LLNode<PQNode<T>> *PTR = LLinkedList<PQNode<T>>::START;
+                    LLNode<Item<T>> *PTR = LLinkedList<Item<T>>::START;
                     // Find a node, to insert after
                     // It should be inserted after the node having same priority
                     while (PTR->info.PriorityValue <= Priority)
@@ -40,7 +36,7 @@ namespace algolib
                     }
                 }
 
-                LLinkedList<PQNode<T>>::InsertAfter(PREV, {item, Priority});
+                LLinkedList<Item<T>>::InsertAfter(PREV, {item, Priority});
             }
 
             T Delete()
@@ -51,30 +47,107 @@ namespace algolib
                     _LOG_("UNDERFLOW");
                     return item;
                 }
-                LLNode<PQNode<T>> *tmp = LLinkedList<PQNode<T>>::START;
+                LLNode<Item<T>> *tmp = LLinkedList<Item<T>>::START;
                 item = tmp->info.info;
-                LLinkedList<PQNode<T>>::START = LLinkedList<PQNode<T>>::START->link;
+                LLinkedList<Item<T>>::START = LLinkedList<Item<T>>::START->link;
                 delete tmp;
                 return item;
             }
 
             bool IsEmpty() const
             {
-                if (LLinkedList<PQNode<T>>::START == nullptr)
+                if (LLinkedList<Item<T>>::START == nullptr)
                     return true;
                 return false;
             }
 
             T GetHigh() const
             {
-                if (LLinkedList<PQNode<T>>::START == nullptr)
+                if (LLinkedList<Item<T>>::START == nullptr)
                 {
                     T t{};
                     return t;
                 }
-                return LLinkedList<PQNode<T>>::START->info.info;
+                return LLinkedList<Item<T>>::START->info.info;
             }
         };
     } // namespace OneWayLList
+
+    namespace ArrayType
+    {
+        template <typename T>
+        class PriorityQ
+        {
+        public:
+            PriorityQ(int MaximumCount, int MaximumPriority = 0) : MAX(MaximumCount)
+            {
+                data = new Queue<T>[MaximumCount];
+
+                for (int i = 0; i < MaximumCount; i++)
+                    data[i].Create(MaximumCount);
+
+                if (MaximumPriority != 0)
+                    this->MaximumPriority = MaximumPriority;
+                else
+                    this->MaximumPriority = MaximumCount;
+            }
+
+            ~PriorityQ()
+            {
+                delete[] data;
+            }
+
+            void Insert(T item, size_t Priority)
+            {
+                Priority = (Priority / static_cast<double>(MaximumPriority)) * MAX;
+                (data[Priority - 1]).Insert(item);
+                Count++;
+            }
+
+            T Delete()
+            {
+                T nullItem{};
+                T nitem{};
+                int Priority = 1;
+                nitem = data[Priority-1].Delete();
+                while (nitem == nullItem)
+                {
+                    Priority++;
+                    if (Priority == MaximumPriority)
+                        return nitem;
+                    nitem = data[Priority-1].Delete();
+                }
+                Count--;
+                return nitem;
+            }
+
+            T GetHigh() const
+            {
+                T nullItem{};
+                T item{};
+                int Priority = 1;
+                item = data[Priority-1].Front();
+                while (item == nullItem)
+                {
+                    Priority++;
+                    if (Priority == MaximumPriority)
+                        return item;
+                    item = data[Priority-1].Front();
+                }
+                return item;
+            }
+
+            size_t GetCount() const
+            {
+                return Count;
+            }
+
+        private:
+            Queue<T> *data;
+            size_t Count {0};
+            size_t MAX;
+            size_t MaximumPriority;
+        };
+    } // namespace MatrixType
 } // namespace algolib
 #endif

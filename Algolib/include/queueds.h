@@ -7,6 +7,8 @@ namespace algolib
     class Queue
     {
     public:
+        Queue() { }
+
         Queue(size_t MaximumCount) : MAX(MaximumCount)
         {
             data = new T[MaximumCount];
@@ -15,6 +17,13 @@ namespace algolib
         ~Queue()
         {
             delete[] data;
+        }
+
+        void Create(size_t MaxmimumCount)
+        {
+            delete[] data;
+            MAX = MaxmimumCount;
+            data = new T[MaxmimumCount];
         }
 
         void Insert(T item)
@@ -70,7 +79,7 @@ namespace algolib
         } 
     private:
         T* data = nullptr;
-        size_t MAX;
+        size_t MAX {0};
         long long int FRONT{-1}, REAR{-1};
     };
 } // namespace algolib
