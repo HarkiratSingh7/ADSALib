@@ -74,14 +74,23 @@ namespace algolib
             return item;
         }
 
-        const T Front() const {
+        const T Front() const 
+        {
             if (FRONT == -1)
             {
                 static T item {};
                 return item;
             }
             return data[FRONT];
-        } 
+        }
+
+        const bool IsEmpty() const 
+        {
+            if (FRONT == -1)
+                return true;
+            else
+                return false;
+        }
     private:
         T* data = nullptr;
         uint32 MAX {0};

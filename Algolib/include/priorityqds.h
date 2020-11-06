@@ -54,21 +54,23 @@ namespace algolib
                 return item;
             }
 
-            bool IsEmpty() const
-            {
-                if (LLinkedList<Item<T>>::START == nullptr)
-                    return true;
-                return false;
-            }
-
             T GetHigh() const
             {
                 if (LLinkedList<Item<T>>::START == nullptr)
                 {
                     T t{};
+                    _LOG_("UNDERFLOW");
                     return t;
                 }
                 return LLinkedList<Item<T>>::START->info.info;
+            }
+
+            const bool IsEmpty() const
+            {
+                if (LLinkedList<Item<T>>::START == nullptr)
+                    return true;
+                else
+                    return false;
             }
         };
     } // namespace OneWayLList
@@ -106,34 +108,30 @@ namespace algolib
 
             T Delete()
             {
-                T nullItem{};
                 T nitem{};
                 int Priority = 1;
-                nitem = data[Priority-1].Delete();
-                while (nitem == nullItem)
+                while (data[Priority-1].IsEmpty())
                 {
                     Priority++;
                     if (Priority == MaximumPriority)
                         return nitem;
-                    nitem = data[Priority-1].Delete();
                 }
+                nitem = data[Priority-1].Delete();
                 Count--;
                 return nitem;
             }
 
             T GetHigh() const
             {
-                T nullItem{};
                 T item{};
                 int Priority = 1;
-                item = data[Priority-1].Front();
-                while (item == nullItem)
+                while (data[Priority-1].IsEmpty())
                 {
                     Priority++;
                     if (Priority == MaximumPriority)
                         return item;
-                    item = data[Priority-1].Front();
                 }
+                item = data[Priority-1].Front();
                 return item;
             }
 
