@@ -26,7 +26,19 @@ int main()
 
     cout << endl;
 
+    OneWayLList::PriorityQ<int> IntExample;
+    IntExample.Insert(0, 3);
+    int aa{};
+    IntExample.Insert(aa, 1);
+    IntExample.Insert(1, 1);
 
+    while (IntExample.IsEmpty() == false)
+    {
+        cout << IntExample.GetHigh() << " ";
+        IntExample.Delete();
+    }
+
+    cout << endl;
 
     return 0;
 }
