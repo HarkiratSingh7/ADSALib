@@ -75,9 +75,11 @@ namespace algolib
         }
 
         const T Front() const {
-            T item {};
             if (FRONT == -1)
+            {
+                static T item {};
                 return item;
+            }
             return data[FRONT];
         } 
     private:
