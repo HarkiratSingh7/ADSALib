@@ -4,9 +4,9 @@
 namespace algolib
 {
     template <typename T>
-    size_t GetIndexLinearSearch(T *data, T item, size_t N)
+    uint32 GetIndexLinearSearch(T *data, T item, uint32 N)
     {
-        size_t Index = 0;
+        uint32 Index = 0;
         while (data[Index] != item && Index < N)
         {
             ++Index;
@@ -17,10 +17,10 @@ namespace algolib
     }
 
     template <typename T>
-    size_t GetIndexBinarySearch(T *data, T item, size_t N)
+    uint32 GetIndexBinarySearch(T *data, T item, uint32 N)
     {
-        size_t lowerBound = 0, upperBound = N - 1;
-        size_t middle = (lowerBound + upperBound) / 2;
+        uint32 lowerBound = 0, upperBound = N - 1;
+        uint32 middle = (lowerBound + upperBound) / 2;
         while (data[middle] != item && lowerBound <= upperBound)
         {
             if (item < data[middle])

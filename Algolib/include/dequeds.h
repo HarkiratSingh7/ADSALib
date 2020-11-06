@@ -15,7 +15,7 @@ namespace algolib
     template <typename T>
     class Deque
     {
-        Deque(size_T MaximumCount) : MAX(MaximumCount)
+        Deque(uint32 MaximumCount) : MAX(MaximumCount)
         {
             data = new T[MaximumCount];
         }
@@ -123,7 +123,7 @@ namespace algolib
 
     private:
         T *data = nullptr;
-        size_t MAX;
+        uint32 MAX;
         long long int FRONT{-1}, REAR{-1};
     };
 } // namespace algolib

@@ -12,14 +12,14 @@ namespace algolib
         struct Item
         {
             T info;
-            size_t PriorityValue{0};
+            uint32 PriorityValue{0};
         };
 
         template <typename T>
         class PriorityQ : private LLinkedList<Item<T>>
         {
         public:
-            void Insert(T item, size_t Priority)
+            void Insert(T item, uint32 Priority)
             {
                 LLNode<Item<T>> *PREV = nullptr;
                 if (LLinkedList<Item<T>>::START)
@@ -97,7 +97,7 @@ namespace algolib
                 delete[] data;
             }
 
-            void Insert(T item, size_t Priority)
+            void Insert(T item, uint32 Priority)
             {
                 Priority = (Priority / static_cast<double>(MaximumPriority)) * MAX;
                 (data[Priority - 1]).Insert(item);
@@ -137,16 +137,16 @@ namespace algolib
                 return item;
             }
 
-            size_t GetCount() const
+            uint32 GetCount() const
             {
                 return Count;
             }
 
         private:
             Queue<T> *data;
-            size_t Count {0};
-            size_t MAX;
-            size_t MaximumPriority;
+            uint32 Count {0};
+            uint32 MAX;
+            uint32 MaximumPriority;
         };
     } // namespace MatrixType
 } // namespace algolib

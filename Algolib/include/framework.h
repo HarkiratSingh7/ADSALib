@@ -6,6 +6,9 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+
+typedef unsigned int uint32;
+
 namespace algolib
 {
     static std::ostream *algolib_log_out = nullptr;

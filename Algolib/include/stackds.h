@@ -7,7 +7,7 @@ namespace algolib
     class Stack
     {
     public:
-        Stack(size_t MaximumCount) : MAX(MaximumCount)
+        Stack(uint32 MaximumCount) : MAX(MaximumCount)
         {
             Linear = new T[MAX];
             TOP = -1;
@@ -49,8 +49,8 @@ namespace algolib
 
     private:
         T *Linear;
-        size_t MAX{0};
-        size_t TOP;
+        uint32 MAX{0};
+        uint32 TOP;
     };
 } // namespace algolib
 #endif

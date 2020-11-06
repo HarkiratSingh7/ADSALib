@@ -37,7 +37,7 @@ namespace algolib
 			}
 		}
 
-		const size_t Count() const
+		const uint32 Count() const
 		{
 			int cont{0};
 			auto fnc = [&](T) { ++cont; };

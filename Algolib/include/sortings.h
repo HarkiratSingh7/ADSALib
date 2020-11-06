@@ -4,10 +4,10 @@
 namespace algolib
 {
     template <typename T>
-    void BubbleSort(T *Array, size_t N, bool descending = false)
+    void BubbleSort(T *Array, uint32 N, bool descending = false)
     {
         // Step 1: Repeat Steps 2 and 3 for K = 1 to N - 1
-        for (size_t K = 0; K < N - 1; K++)
+        for (uint32 K = 0; K < N - 1; K++)
         {
             // Step 2: Set Index = 1
             int Index = 0;
@@ -30,7 +30,7 @@ namespace algolib
     }
 
     template <typename T>
-    void QUICK(T *Array, size_t N, T &BEG, T &END, T &LOC)
+    void QUICK(T *Array, uint32 N, T &BEG, T &END, T &LOC)
     {
         // Step 1: Set LEFT := BEG, RIGHT := END and LOC := BEG
         T left = BEG; // Copy Constructor used
@@ -94,7 +94,7 @@ namespace algolib
     }
 
     template <typename T>
-    void QuickSort(T *Array, size_t N)
+    void QuickSort(T *Array, uint32 N)
     {
         // Step 1: Intialize
         T TOP = -1;

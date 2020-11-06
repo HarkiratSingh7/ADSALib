@@ -9,7 +9,7 @@ namespace algolib
     public:
         Queue() { }
 
-        Queue(size_t MaximumCount) : MAX(MaximumCount)
+        Queue(uint32 MaximumCount) : MAX(MaximumCount)
         {
             data = new T[MaximumCount];
         }
@@ -19,7 +19,7 @@ namespace algolib
             delete[] data;
         }
 
-        void Create(size_t MaxmimumCount)
+        void Create(uint32 MaxmimumCount)
         {
             delete[] data;
             MAX = MaxmimumCount;
@@ -74,12 +74,15 @@ namespace algolib
             return item;
         }
 
-        const T& Front() const {
+        const T Front() const {
+            T item {};
+            if (FRONT == -1)
+                return item;
             return data[FRONT];
         } 
     private:
         T* data = nullptr;
-        size_t MAX {0};
+        uint32 MAX {0};
         long long int FRONT{-1}, REAR{-1};
     };
 } // namespace algolib

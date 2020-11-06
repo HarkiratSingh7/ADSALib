@@ -30,7 +30,7 @@ int main()
 
 		STACK.Push('(');
 		exp.append(")");
-		for (size_t i = 0; i < exp.length() && !STACK.IsEmpty(); i++)
+		for (uint32 i = 0; i < exp.length() && !STACK.IsEmpty(); i++)
 		{
 			if (exp[i] == '(')
 				STACK.Push('(');
