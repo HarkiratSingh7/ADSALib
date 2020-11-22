@@ -23,6 +23,8 @@ The Algolib folder has implementation of various data structures and their algor
 
 #### Sorting Algorithms header - [Algolib/include/sortings.h](Algolib/include/sortings.h)
 
+#### Binary Search Tree and Traversings - [Algolib/include/treesds.h](Algolib/include/treesds.h)
+
 ### **Implementation folder**
 
 #### Tower of hanoi with and without recursion - [Implementations/TowerOfHanoi](Implementations/TowerOfHanoi)
