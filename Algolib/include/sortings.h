@@ -1,8 +1,23 @@
 #ifndef SORTINGS_H
 #define SORTINGS_H
 #include "framework.h"
+#include "treesds.h"
 namespace algolib
 {
+    template <typename T>
+    void HeapSort(T *Array, uint32 N)
+    {
+        for (uint32 i = 1; i <= N - 1;)
+            trees::MaxHeapSequence<T>::Insert(Array[i], i, N, Array); // Automatically Increments
+        while (N > 1)
+        {
+            T item;
+            trees::MaxHeapSequence<T>::Delete(item, N, Array);
+            Array[N] = item;
+        }
+
+    }
+
     template <typename T>
     void BubbleSort(T *Array, uint32 N, bool descending = false)
     {
