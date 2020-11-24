@@ -7,6 +7,15 @@ using namespace std;
 using namespace algolib;
 using namespace trees;
 
+#define RUN_CALC_TIME(precedeText,func) {\
+    cout << "\n"<<precedeText<<"\n";\
+    auto timePoint1 = chrono::system_clock::now();\
+    func;\
+    auto timePoint2 = chrono::system_clock::now();\
+    chrono::duration<double> TIME_TAKEN = timePoint2 - timePoint1;\
+    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;\
+}
+
 int main()
 {
     BinarySearchTrees<int> GoodTree;
@@ -31,52 +40,17 @@ int main()
         std::cout << a << " ";
     };
 
-    cout << "\nUsing iterative PREORDER\n";
-    auto timePoint = chrono::system_clock::now();
-    PreOrder(GoodTree.GetRoot(), print);
-    auto timePoint2 = chrono::system_clock::now();
-    chrono::duration<double> TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
-        
-    cout << "\nUsing recursive PREORDER\n";
-    timePoint = chrono::system_clock::now();
-    PreOrderRec(GoodTree.GetRoot(), print);
-    timePoint2 = chrono::system_clock::now();
-    TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
-     
-
-    cout << "\nUsing iterative INORDER\n";
-    timePoint = chrono::system_clock::now();
-    InOrder(GoodTree.GetRoot(), print);
-    timePoint2 = chrono::system_clock::now();
-    TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
-     
+    RUN_CALC_TIME("Using iterative PREORDER", PreOrder(GoodTree.GetRoot(), print))
     
-    cout << "\nUsing recursive INORDER\n";
-    timePoint = chrono::system_clock::now();
-    InOrderRec(GoodTree.GetRoot(), print);
-    timePoint2 = chrono::system_clock::now();
-    TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
+    RUN_CALC_TIME("Using recursie PREORDER", PreOrderRec(GoodTree.GetRoot(), print))
+
+    RUN_CALC_TIME("Using iterative INORDER", InOrder(GoodTree.GetRoot(), print))
     
-
-    cout << "\nUsing iterative POSTORDER\n";
-    timePoint = chrono::system_clock::now();
-    PostOrder(GoodTree.GetRoot(), print);
-    timePoint2 = chrono::system_clock::now();
-    TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
-     
-
-    cout << "\nUsing recursive POSTORDER\n";
-    timePoint = chrono::system_clock::now();
-    PostOrderRec(GoodTree.GetRoot(), print);
-    timePoint2 = chrono::system_clock::now();
-    TIME_TAKEN = timePoint2 - timePoint;
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;
-     
+    RUN_CALC_TIME("Using recursive INORDER", InOrderRec(GoodTree.GetRoot(), print))
+    
+    RUN_CALC_TIME("Using iterative POSTORDER", PostOrder(GoodTree.GetRoot(), print))
+    
+    RUN_CALC_TIME("Using recursive POSTORDER", PostOrderRec(GoodTree.GetRoot(), print))
 
     return 0;
 }
