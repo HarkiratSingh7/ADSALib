@@ -29,7 +29,7 @@ int main()
     Print(arr2);
 
     int arr3[N] = DATA_ARR;
-    RUN_CALC_TIME("QuickSort", BubbleSort(arr3, N));
+    RUN_CALC_TIME("QuickSort", QuickSort(arr3, N));
     Print(arr3);
 
     return 0;
