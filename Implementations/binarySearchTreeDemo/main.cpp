@@ -7,15 +7,6 @@ using namespace std;
 using namespace algolib;
 using namespace trees;
 
-#define RUN_CALC_TIME(precedeText,func) {\
-    cout << "\n"<<precedeText<<"\n";\
-    auto timePoint1 = chrono::system_clock::now();\
-    func;\
-    auto timePoint2 = chrono::system_clock::now();\
-    chrono::duration<double> TIME_TAKEN = timePoint2 - timePoint1;\
-    cout <<'\n' << TIME_TAKEN.count() << " s time elapsed" << endl;\
-}
-
 int main()
 {
     BinarySearchTrees<int> GoodTree;
@@ -42,7 +33,7 @@ int main()
 
     RUN_CALC_TIME("Using iterative PREORDER", PreOrder(GoodTree.GetRoot(), print))
     
-    RUN_CALC_TIME("Using recursie PREORDER", PreOrderRec(GoodTree.GetRoot(), print))
+    RUN_CALC_TIME("Using recursive PREORDER", PreOrderRec(GoodTree.GetRoot(), print))
 
     RUN_CALC_TIME("Using iterative INORDER", InOrder(GoodTree.GetRoot(), print))
     

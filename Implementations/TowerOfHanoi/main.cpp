@@ -1,6 +1,6 @@
 // This file has implemented TowerOfHanoi using Recursion and without using Recursion
-// We can use Stacks to emulate recursions. 
-// The emulated recursion is slower than the recursion method, the time can be seen in output.
+// We can use Stacks to emulate recursions.
+// Stacks seem to get faster sometimes. Sometimes recursion seem faster. (INCASE OF BIGGER NUMBERS 6,7,8,9,10,.. etc)
 
 #include <iostream>
 #include "stackds.h"
@@ -22,28 +22,10 @@ int main()
         int n;
         cout << "Now steps for tower of hanoi for n = (Input your value) ";
         cin >> n;
-        cout << "Using Recursion: ";
-
-        auto timePoint = chrono::system_clock::now();
-        RecTowerOfHanoi(n, "A", "B", "C");
-        auto timePoint2 = chrono::system_clock::now();
-
-        cout << endl;
+        RUN_CALC_TIME("Using Recursion", RecTowerOfHanoi(n, "A", "B", "C"));
         
-        chrono::duration<double> TIME_TAKEN = timePoint2 - timePoint;
-        cout << TIME_TAKEN.count() << " s time elapsed" << endl;
-        
-        cout << "Without Recursion: ";
+        RUN_CALC_TIME("Using Stacks", TowerOfHanoi(n, "A", "B", "C"));
 
-        timePoint = chrono::system_clock::now();
-        TowerOfHanoi(n, "A", "B", "C");
-        timePoint2 = chrono::system_clock::now();
-        
-        cout << endl;
-
-        TIME_TAKEN = timePoint2 - timePoint;
-        cout << TIME_TAKEN.count() << " s time elapsed" << endl;
-        
         cout << "Do you want to continue ? (y/n) ";
         char a;
         cin >> a;

@@ -6,8 +6,20 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <chrono>
+#include <iomanip>
 
 typedef unsigned int uint32;
+
+#define RUN_CALC_TIME(precedeText,func) {\
+    cout << "\n"<<precedeText<<"\n";\
+    auto timePoint1 = chrono::high_resolution_clock::now();\
+    func;\
+    auto timePoint2 = chrono::high_resolution_clock::now();\
+    double TIME_TAKEN = chrono::duration_cast<chrono::nanoseconds>(timePoint2 - timePoint1).count();\
+    TIME_TAKEN *= 1e-9;\
+    cout <<'\n'<<"Time: "<<fixed << TIME_TAKEN<<setprecision(9) << " s time elapsed" << endl;\
+}
 
 namespace algolib
 {
