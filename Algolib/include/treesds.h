@@ -111,8 +111,8 @@ namespace algolib
         void InOrderRec(node<T> *root, std::function<void(T)> func)
         {
             if (root == nullptr)
-            return;
-            
+                return;
+
             if (root->left)
                 InOrderRec(root->left, func);
             func(root->info);
@@ -124,8 +124,8 @@ namespace algolib
         void PreOrderRec(node<T> *root, std::function<void(T)> func)
         {
             if (root == nullptr)
-            return;
-            
+                return;
+
             func(root->info);
             if (root->left)
                 PreOrderRec(root->left, func);
@@ -137,8 +137,8 @@ namespace algolib
         void PostOrderRec(node<T> *root, std::function<void(T)> func)
         {
             if (root == nullptr)
-            return;
-            
+                return;
+
             if (root->left)
                 PostOrderRec(root->left, func);
             if (root->right)
@@ -149,8 +149,8 @@ namespace algolib
         template <typename T>
         class BinarySearchTrees
         {
-            public:
-            void find(const T& item, node<T>*& nodeloc, node<T>*& nodeparent) const
+        public:
+            void find(const T &item, node<T> *&nodeloc, node<T> *&nodeparent) const
             {
                 if (!root)
                 {
@@ -165,7 +165,7 @@ namespace algolib
                     return;
                 }
 
-                node<T>* curr, *prev;
+                node<T> *curr, *prev;
                 if (item < root->info)
                 {
                     curr = root->left;
@@ -185,7 +185,7 @@ namespace algolib
                         nodeparent = prev;
                         return;
                     }
-                    
+
                     prev = curr;
                     if (item < curr->info)
                         curr = curr->left;
@@ -199,12 +199,12 @@ namespace algolib
 
             void Insert(T item)
             {
-                node<T>* node_location, *node_parent;
+                node<T> *node_location, *node_parent;
                 find(item, node_location, node_parent);
                 if (node_location)
                     return;
-                
-                node<T>* newNode = new node<T>;
+
+                node<T> *newNode = new node<T>;
                 newNode->info = item;
                 newNode->left = newNode->right = nullptr;
 
@@ -216,12 +216,86 @@ namespace algolib
                     node_parent->right = newNode;
             }
 
-            node<T>* GetRoot() const
+            node<T> *GetRoot() const
             {
                 return root;
             }
+
         private:
             node<T> *root = nullptr;
+        };
+
+        template <typename T>
+        class MaxHeapSequence // MaxHeap
+        {
+        public:
+            MaxHeapSequence(uint32 _size)
+            {
+                Array = new T[_size];
+            }
+            ~MaxHeapSequence()
+            {
+                delete[] Array;
+            }
+
+            static void Insert(T item, uint32 &NumOfItems, uint32_t MaxSize, T *arr) // Can be used with any array
+            {
+                NumOfItems++;
+                if (NumOfItems > MaxSize)
+                {
+                    _LOG_("HEAP STRUCTURE OVERFLOW");
+                    return;
+                }
+                uint32 itr = NumOfItems - 1;
+                while (itr > 0)
+                {
+                    uint32 parentIndex = ((itr+1) / 2) - 1 ;
+                    if (item <= arr[parentIndex])
+                    {
+                        arr[itr] = item;
+                        return;
+                    }
+                    arr[itr] = arr[parentIndex];
+                    itr = parentIndex;
+                }
+                arr[0] = item;
+            }
+
+            static void Delete(T &item, uint32 &NumOfItems, T *arr) // Can be used with any array
+            {
+                item = arr[0];
+                T last = arr[NumOfItems - 1];
+                NumOfItems--;
+                uint32 itr = 0, Litr = 1, Ritr = 2;
+                while (Ritr < NumOfItems)
+                {
+                    if (last >= arr[Litr] && last >= arr[Ritr])
+                    {
+                        arr[itr] = last;
+                        return;
+                    }
+
+                    if (arr[Ritr] <= arr[Litr])
+                    {
+                        arr[itr] = arr[Litr];
+                        itr = Litr;
+                    }
+                    else
+                    {
+                        arr[itr] = arr[Ritr];
+                        itr = Ritr;
+                    }
+                    Litr = itr * 2 + 1;
+                    Ritr = Litr + 1;
+                }
+                if (Litr == NumOfItems - 1 && last < arr[Litr])
+                    itr = Litr;
+
+                arr[itr] = last;
+            }
+
+        private:
+            T *Array;
         };
     } // namespace trees
 } // namespace algolib
