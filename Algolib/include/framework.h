@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <chrono>
 #include <iomanip>
+#include <cmath>
 
 typedef unsigned int uint32;
 
