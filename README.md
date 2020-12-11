@@ -25,6 +25,8 @@ The Algolib folder has implementation of various data structures and their algor
 
 #### Binary Search Tree and Traversings - [Algolib/include/treesds.h](Algolib/include/treesds.h)
 
+#### Graph, Warshall Algorithm and Shortest Path Matrix - [Algolib/include/graph.h](Algolib/include/graph.h)
+
 ### **Implementation folder**
 
 #### Tower of hanoi with and without recursion - [Implementations/TowerOfHanoi](Implementations/TowerOfHanoi)
