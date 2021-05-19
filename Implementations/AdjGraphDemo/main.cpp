@@ -1,7 +1,7 @@
 #include <iostream>
-#include "graph.h"
 
 using namespace std;
+#include "graph.h"
 using namespace algolib;
 
 const uint32 N = 4;
