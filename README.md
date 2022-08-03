@@ -29,6 +29,9 @@ The Algolib folder has implementation of various data structures and their algor
 
 #### **Trie Data Structure** - [Algolib/include/trie.h](Algolib/include/trie.h)
 
+#### **Segment Trees** - [Algolib/include/segmentTrees.h](Algolib/include/segmentTrees.h)
+
+#### **Disjoint Sets** - [Algolib/include/disjoint.h](Algolib/include/disjoint.h)
 
 ### **Implementation folder**
 
