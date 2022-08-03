@@ -2,45 +2,46 @@
 #define DISJOINT_J
 #include "framework.h"
 
-using namespace std;
-
-class DisjointSet
+namespace algolib
 {
-private:
-    // first -> parent, second -> rank
-    vector<pair<int, int>> subsets;
-    int initialTotal{0};
-
-public:
-    DisjointSet(int individual)
-        : initialTotal(individual)
+    class DisjointSet
     {
-        subsets.assign(individual, {0, 0});
-        for (int i = 0; i < individual; i++)
-            subsets[i].first = i;
-    }
+    private:
+        // first -> parent, second -> rank
+        std::vector<std::pair<int, int>> subsets;
+        int initialTotal{0};
 
-    int find(int x)
-    {
-        if (x != subsets[x].first)
-            subsets[x].first = find(subsets[x].first);
-        return subsets[x].first;
-    }
-
-    void set_union(int x, int y)
-    {
-        int px = find(x);
-        int py = find(y);
-
-        if (subsets[px].second > subsets[py].second)
-            subsets[py].first = px;
-        else
+    public:
+        DisjointSet(int individual)
+            : initialTotal(individual)
         {
-            subsets[px].first = py;
-            if (subsets[px].second == subsets[py].second)
-                subsets[py].second++;
+            subsets.assign(individual, {0, 0});
+            for (int i = 0; i < individual; i++)
+                subsets[i].first = i;
         }
-    }
-};
+
+        int find(int x)
+        {
+            if (x != subsets[x].first)
+                subsets[x].first = find(subsets[x].first);
+            return subsets[x].first;
+        }
+
+        void set_union(int x, int y)
+        {
+            int px = find(x);
+            int py = find(y);
+
+            if (subsets[px].second > subsets[py].second)
+                subsets[py].first = px;
+            else
+            {
+                subsets[px].first = py;
+                if (subsets[px].second == subsets[py].second)
+                    subsets[py].second++;
+            }
+        }
+    };
+}
 
 #endif
